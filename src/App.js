@@ -179,6 +179,7 @@ function App() {
 
   return (
     <Router>
+       <Analytics />
       <Routes>
         <Route path="/questions" element={<Questions />} />
         <Route path="/test" element={<Test />} />
