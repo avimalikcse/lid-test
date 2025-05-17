@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Pagination, Box, Typography, Card, CardContent, Button } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Modal from '@mui/material/Modal';
+import { Analytics } from "@vercel/analytics/react"
 
 const style = {
   position: 'absolute',
