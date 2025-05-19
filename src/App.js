@@ -84,8 +84,11 @@ const CardComponent = ({ q,index,questionCallback=null }) => {
 const Test = () => {
   const [testQuestions, setTestQuestions] = useState([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const mainQuestions = question.slice(0, 300);
+  const hessenQuestions = question.filter((q) => String(q.num).includes("HE-"));
+  const allQuestions = mainQuestions.concat(hessenQuestions);
   React.useEffect(() => {
-    const shuffledQuestions = [...question.slice(0,300)].sort(() => 0.5 - Math.random());
+    const shuffledQuestions = allQuestions.sort(() => 0.5 - Math.random());
     setTestQuestions(shuffledQuestions.slice(0, 33));
   }, []);
 
@@ -149,9 +152,11 @@ const Questions = () =>{
     setPage(value);
   };
   const mainQuestions = question.slice(0, 300);
+  const hessenQuestions = question.filter((q) => String(q.num).includes("HE-"));
+  const allQuestions = mainQuestions.concat(hessenQuestions);
   const startIndex = (page - 1) * QUESTIONS_PER_PAGE;
   const endIndex = startIndex + QUESTIONS_PER_PAGE;
-  const currentQuestions = mainQuestions.slice(startIndex, endIndex)
+  const currentQuestions = allQuestions.slice(startIndex, endIndex)
 
   return (
     <div className="App">
@@ -165,7 +170,7 @@ const Questions = () =>{
 
         })}
         <Pagination
-          count={Math.ceil(mainQuestions.length / QUESTIONS_PER_PAGE)}
+          count={Math.ceil(allQuestions.length / QUESTIONS_PER_PAGE)}
           page={page}
           onChange={handleChange}
           sx={{ marginTop: 2 }}
